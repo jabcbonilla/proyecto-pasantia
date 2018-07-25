@@ -1,0 +1,20 @@
+{
+  "name": "flashgraphic",
+  "version": "1.0.0",
+  "description": "grafica lo que imaginas",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.7.2",
+    "express": "^4.16.3",
+    "jade": "^1.11.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.2.4",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "williams-jose",
+  "license": "ISC"
+}
