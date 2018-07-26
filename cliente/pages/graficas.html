@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="../tools/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="../tools/chartjs/Chart.bundle.min.js"></script>
+	
+    <title>Grafica</title>
+    <nav>
+        
+            <a href="index.html">Principal</a>
+            <a class="left" href="login.html">iniciar sesion</a>
+            <a class="left" href="registrar.html">registro</a>
+        
+    </nav>
+</head>
+<body>
+    <form id="radios">
+        <input type="radio" name="tipo" id="barras" value="bar" onclick="func(this.value)"> barras
+        <input type="radio" name="tipo" id="torta" value="pie" onclick="func(this.value)"> torta
+        <input type="radio" name="tipo" id="linea" value="line" onclick="func(this.value)"> linea
+        <input type="radio" name="tipo" id="areapolar" value="polarArea" onclick="func(this.value)"> Area Polar
+        <input type="radio" name="tipo" id="radar" value="radar" onclick="func(this.value)"> Radar
+        <input type="radio" name="tipo" id="dona" value="doughnut" onclick="func(this.value)"> dona
+        <input type="radio" name="tipo" id="burbuja" value="bubble" onclick="func(this.value)"> Burbujas
+   <input type="radio" name="tipo" id="scatter" value="scatter" onclick="func(this.value)"> scatter
+    </form>
+    
+    <canvas id="myChart" style="max-width: 500px;"></canvas>
+    <input type="button" id="add" value="agregar dato">
+    <input type="button" id="quit" value="remover dato">
+    <input type="button" id="addcol" value="agregar columna">
+    <input type="button" id="quitcol" value="remover columna">
+    <input type="button" id="new"value="nuevos datos">
+
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart
+    function func(tipo){
+    
+    cargargrafico(tipo);
+}
+    getgrafica();
+    
+
+    function cargargrafico(tipo){
+    myChart = Chart 
+    myChart = new Chart(ctx, {
+    type: tipo,
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+
+function getgrafica(){
+    var graf= [];
+    var monthArray = [];
+     var petrolPrices = [];
+     var dieselPrices = [];
+
+
+  
+        for ( index in docs){
+          var doc = docs[index];
+          //category array
+          var month = doc['month'];
+          //series 1 values array
+          var petrol = doc['petrol'];
+          //series 2 values array
+          var diesel = doc['diesel'];
+          
+          monthArray.push({"label": month});
+          petrolPrices.push({"value" : petrol});
+          dieselPrices.push({"value" : diesel});
+        }
+
+        var dataset = [
+          {
+            "seriesname" : "Petrol Price",
+            "data" : petrolPrices
+          },
+          {
+            "seriesname" : "Diesel Price",
+            "data": dieselPrices
+          }
+        ];
+
+        var response = {
+          "dataset" : dataset,
+          "categories" : monthArray
+        };
+
+        var chartProperties = {
+    "caption": "Variation of Petrol and Diesel price in Bangalore",
+    "numberprefix": "Rs",
+    "xAxisName": "Month",
+    "yAxisName": "Price"
+};
+var categoriesArray = [{
+      "category" : data["categories"]
+}];
+
+var lineChart = new FusionCharts({
+    type: 'msline',
+    renderAt: 'chart-location',
+    width: '100Ω',
+    height: '600',
+    dataFormat: 'json',
+    dataSource: {
+        chart: chartProperties,
+        categories : categoriesArray,
+        dataset : data["dataset"]
+    }
+});
+lineChart.render()
+      
+}
+
+
+</script>
+</body>
+</html>
