@@ -86,7 +86,18 @@
 }
 
 function getgrafica(){
-    var graf= [];
+
+    var docs
+    
+    fetch("http://localhost:8080/api/fuel")
+.then(res => res.json())
+.then((out) => {
+  console.log('Checkout this JSON! ', out);
+   docs=out;
+})
+.catch(err => { throw err });
+    
+    console.log(docs)
     var monthArray = [];
      var petrolPrices = [];
      var dieselPrices = [];
@@ -106,48 +117,7 @@ function getgrafica(){
           petrolPrices.push({"value" : petrol});
           dieselPrices.push({"value" : diesel});
         }
-
-        var dataset = [
-          {
-            "seriesname" : "Petrol Price",
-            "data" : petrolPrices
-          },
-          {
-            "seriesname" : "Diesel Price",
-            "data": dieselPrices
-          }
-        ];
-
-        var response = {
-          "dataset" : dataset,
-          "categories" : monthArray
-        };
-
-        var chartProperties = {
-    "caption": "Variation of Petrol and Diesel price in Bangalore",
-    "numberprefix": "Rs",
-    "xAxisName": "Month",
-    "yAxisName": "Price"
-};
-var categoriesArray = [{
-      "category" : data["categories"]
-}];
-
-var lineChart = new FusionCharts({
-    type: 'msline',
-    renderAt: 'chart-location',
-    width: '100Ω',
-    height: '600',
-    dataFormat: 'json',
-    dataSource: {
-        chart: chartProperties,
-        categories : categoriesArray,
-        dataset : data["dataset"]
     }
-});
-lineChart.render()
-      
-}
 
 
 </script>
