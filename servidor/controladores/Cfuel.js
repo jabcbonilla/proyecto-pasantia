@@ -51,11 +51,13 @@ function insertfuel(req,res){
                       monthArray.push({"label": month});
                       petrolPrices.push({"value" : petrol});
                       dieselPrices.push({"value" : diesel});
-
+                      console.log(dieselPrices)
+                      console.log(petrolPrices) 
                       var dataset = [
                         {
                           "seriesname" : "Petrol Price",
                           "data" : petrolPrices
+                          
                         },
                         {
                           "seriesname" : "Diesel Price",
@@ -68,7 +70,7 @@ function insertfuel(req,res){
                         "categories" : monthArray
                       };
                       console.log(response)
-                    return response;
+                    //return response;
                     }
                 }
             

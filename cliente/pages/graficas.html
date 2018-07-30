@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--<script type="text/javascript" src="../tools/jquery-1.12.0.min.js"></script>
-	<script type="text/javascript" src="../tools/chartjs/Chart.bundle.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script type="text/javascript" src="../tools/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="../tools/chartjs/Chart.bundle.min.js"></script> 
+	<!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
 	
     <title>Grafica</title>
     <nav>
@@ -105,21 +106,38 @@ function getgrafica(){
      var dieselPrices = [];
 
 
-  
-        for ( index in docs){
-          var doc = docs[index];
-          //category array
-          var month = doc['month'];
-          //series 1 values array
-          var petrol = doc['petrol'];
-          //series 2 values array
-          var diesel = doc['diesel'];
-          
-          monthArray.push({"label": month});
-          petrolPrices.push({"value" : petrol});
-          dieselPrices.push({"value" : diesel});
+            for ( var i=0; i< docs.length;i++){
+                var doc = docs[i];
+                  //category array
+                var month = doc['month'];
+                  //series 1 values array
+                var petrol = doc['petrol'];
+                      //series 2 values array
+                var diesel = doc['diesel'];
+                      
+                  monthArray.push({"label": month});
+                  petrolPrices.push({"value" : petrol});
+                  dieselPrices.push({"value" : diesel});
+
+                  var dataset = [
+                        {
+                          "seriesname" : "Petrol Price",
+                          "data" : petrolPrices
+                        },
+                        {
+                          "seriesname" : "Diesel Price",
+                          "data": dieselPrices
+                        }
+                      ];
+              
+                      var response = {
+                        "dataset" : dataset,
+                        "categories" : monthArray
+                      };
+                      console.log(response)
+                    return response;
+                    }
         }
-    }
 
 
 </script>
