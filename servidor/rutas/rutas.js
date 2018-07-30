@@ -14,7 +14,7 @@ api.get('/singin',Cusuario.Iniciarsesion)
 api.get("/fuel",Cfuel.getfuel)
 api.get("/insertfuel",Cfuel.insertfuel)
 api.get("/fp", function(req, res){
-    Cfuel.getdata(res);
+    res.render("chartbd");
   });
 
 
